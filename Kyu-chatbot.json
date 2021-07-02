@@ -1,0 +1,285 @@
+{
+  "intents": [
+    {
+      "intent": "Welcome",
+      "examples": [
+        {
+          "text": "Can I ask a question?"
+        },
+        {
+          "text": "Hi , I have a question"
+        },
+        {
+          "text": "I have a question"
+        },
+        {
+          "text": "I want to ask"
+        },
+        {
+          "text": "I want to ask about something"
+        },
+        {
+          "text": "Question"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Type_of_questions",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "app",
+          "synonyms": [
+            "page",
+            "website",
+            "wep page"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "company",
+          "synonyms": [
+            "method",
+            "smart",
+            "smart methods"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "work",
+          "synonyms": [
+            "contoll",
+            "run",
+            "save"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "YesOrNo",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "no",
+          "synonyms": [
+            "I don't know",
+            "maybe",
+            "nope",
+            "not really",
+            "not sure",
+            "no way"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "yes",
+          "synonyms": [
+            "of course",
+            "sure",
+            "yeah",
+            "yup"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I'm Kyu, How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_8_1625027576606",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Type of questions",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You can use this page/application to control the angles of the robot arm or the direction of its movement...\n\nWas it a helpful answer?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Type_of_questions:app",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1625026148413",
+      "previous_sibling": "node_8_1625025699631"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "1- Use the sliders to select the angle you want.\n2- Use the (Save) button to save the angle values.\n3- Use the (play) button to operate the arm.\n4- Use the (stop) button to stop the arm.\n5- Use the buttons (right, left, up, down) to control the direction of the robot.\n\nWas it a helpful answer?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Type_of_questions:work",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1625026430963",
+      "previous_sibling": "node_8_1625026332743"
+    },
+    {
+      "type": "standard",
+      "title": "Thank you",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I'm happy with that, have a nice day"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@YesOrNo:yes",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_6_1625027357828",
+      "previous_sibling": "node_2_1625026430963"
+    },
+    {
+      "type": "standard",
+      "title": "welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Sure, what is your question about?"
+              },
+              {
+                "text": "Ok, what is your question?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Welcome",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1625025699631"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Smart Methods is : A national commercial enterprise established in 2010 specializing in automated equipment, robotics and artificial intelligence, ranked by Forbes magazine as one of the most innovative companies in the Kingdom of Saudi Arabia in the last classification of 2015.\n\nWas it a helpful answer?\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Type_of_questions:company",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1625026332743",
+      "previous_sibling": "node_1_1625026148413"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Sorry for that, ask me again..."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "Anything else"
+      },
+      "conditions": "@YesOrNo:no",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_8_1625027576606",
+      "previous_sibling": "node_6_1625027357828"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "chatbot",
+  "language": "en",
+  "description": ""
+}
