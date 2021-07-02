@@ -1,6 +1,6 @@
 # IOT_Task3_chatbot
 
-In this repository you will find, **code** that was written to program a **chatbot system** , picture of the chatbot and a Video showing how it works.
+In this repository you will find, **Code** written to program the **chatbot system** combined with the **HTML** code in the **index.html file** , picture of the chatbot and a Video showing how it works.
 
 - I used **IBM Watson** to create this chatbot.
 
